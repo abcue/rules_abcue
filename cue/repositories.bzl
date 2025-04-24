@@ -10,7 +10,7 @@ load("//cue/private:toolchains_repo.bzl", "PLATFORMS", "toolchains_repo")
 load("//cue/private:versions.bzl", "TOOL_VERSIONS")
 
 DEFAULT_NAME = "cue"
-DEFAULT_VERSION = "0.12.0"
+DEFAULT_VERSION = "0.12.1"
 
 def http_archive(name, **kwargs):
     maybe(_http_archive, name = name, **kwargs)

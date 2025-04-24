@@ -3,20 +3,20 @@
 TODO: generate this file from GitHub API"""
 
 TOOL_VERSIONS = {
-    # https://github.com/cue-lang/cue/releases/download/v0.12.0/checksums.txt
-    # 8474e522a978ecadef49b06d706ff276cd07629b1aa107b88adfc1284d3f93cc  cue_v0.12.0_darwin_amd64.tar.gz
-    # 7055a6423f753c8ea763699d48d78d341e8543397399daee281c66ecdc9ec5a5  cue_v0.12.0_darwin_arm64.tar.gz
-    # e55cd5abd98a592c110f87a7da9ef15bc72515200aecfe1bed04bf86311f5ba1  cue_v0.12.0_linux_amd64.tar.gz
-    # 488012bb0e5c080e2a9694ef8765403dd1075a4ec373dda618efa2d37b47f14f  cue_v0.12.0_linux_arm64.tar.gz
-    # 268bf95f4767b37d5db01450d55ca9d10e9a8bd8a1417c31dff456b5f9775abf  cue_v0.12.0_windows_amd64.zip
-    # 91ad090eb86b0d21186d8de0a7b985d235b27e67cd464f7738663e457b042505  cue_v0.12.0_windows_arm64.zip
-    "0.12.0": {
-        "darwin_amd64": "8474e522a978ecadef49b06d706ff276cd07629b1aa107b88adfc1284d3f93cc",
-        "darwin_arm64": "7055a6423f753c8ea763699d48d78d341e8543397399daee281c66ecdc9ec5a5",
-        "linux_amd64": "e55cd5abd98a592c110f87a7da9ef15bc72515200aecfe1bed04bf86311f5ba1",
-        "linux_arm64": "488012bb0e5c080e2a9694ef8765403dd1075a4ec373dda618efa2d37b47f14f",
-        "windows_amd64": "268bf95f4767b37d5db01450d55ca9d10e9a8bd8a1417c31dff456b5f9775abf",
-        "windows_arm64": "91ad090eb86b0d21186d8de0a7b985d235b27e67cd464f7738663e457b042505",
+    # https://github.com/cue-lang/cue/releases/download/v0.12.1/checksums.txt
+    # a39201b519d26388074fdb5aaafc653e98bade9e3d4472d4044f75a6888bfcba  cue_v0.12.1_darwin_amd64.tar.gz
+    # 3eb7180adc231503b519cfa0934c0f856a2ad850d84ad3f6988bf86f6b2ace9f  cue_v0.12.1_darwin_arm64.tar.gz
+    # 40ef0a84594494c953945fb297842d3168c92170694928c9565cc0b581235ac5  cue_v0.12.1_linux_amd64.tar.gz
+    # ee296a58a17cc9141ad9abfd25e33faefd3fdb376e27fe6e599ceadb12fd0901  cue_v0.12.1_linux_arm64.tar.gz
+    # a80b570bd5d2d7d7e653f3c8689b37a7396a98d486901a14954f1ef6a83bd275  cue_v0.12.1_windows_amd64.zip
+    # 61563bf81f0020bf7b6dd7f69b981f0e77dd0a014b17323905236623ca3ca705  cue_v0.12.1_windows_arm64.zip
+    "0.12.1": {
+        "darwin_amd64": "a39201b519d26388074fdb5aaafc653e98bade9e3d4472d4044f75a6888bfcba",
+        "darwin_arm64": "3eb7180adc231503b519cfa0934c0f856a2ad850d84ad3f6988bf86f6b2ace9f",
+        "linux_amd64": "40ef0a84594494c953945fb297842d3168c92170694928c9565cc0b581235ac5",
+        "linux_arm64": "ee296a58a17cc9141ad9abfd25e33faefd3fdb376e27fe6e599ceadb12fd0901",
+        "windows_amd64": "a80b570bd5d2d7d7e653f3c8689b37a7396a98d486901a14954f1ef6a83bd275",
+        "windows_arm64": "61563bf81f0020bf7b6dd7f69b981f0e77dd0a014b17323905236623ca3ca705",
     },
     # https://github.com/cue-lang/cue/releases/download/v0.11.2/checksums.txt
     # 75023d1b98ce8a4398b9b652c093cd44aa5255976f162d099aca3dd68abf1d58  cue_v0.11.2_darwin_amd64.tar.gz
