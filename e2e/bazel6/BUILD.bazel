@@ -1,0 +1,95 @@
+"""Provides a simple way to test your rules as an external workspace.
+Add a basic bazel6-test target below.
+"""
+
+load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@rules_abcue//cue:defs.bzl", "cue_def", "cue_export", "cue_instance", "cue_version")
+
+# version
+
+genrule(
+    name = "version_short",
+    srcs = [],
+    outs = ["version.short"],
+    cmd = "$(CUE_BIN) version | grep 'cue version' > $@",
+    toolchains = [
+        "@rules_abcue//cue:resolved_toolchain",
+    ],
+)
+
+cue_version(
+    name = "cue_version",
+)
+
+# instance
+
+cue_instance(
+    name = "cue_instance",
+    package_name = "bazel6",
+    srcs = ["bazel6.cue"],
+    ancestor = "//cue.mod",
+)
+
+# export
+
+cue_export(
+    name = "cue_export",
+    out = "yaml",
+    instance = ":cue_instance",
+    package = "bazel6",
+)
+
+write_file(
+    name = "export_golden",
+    out = "export.golden.yaml",
+    content = ["version: 6.3.2\n"],
+)
+
+diff_test(
+    name = "diff_export",
+    file1 = ":cue_export",
+    file2 = ":export_golden",
+)
+
+cue_export(
+    name = "cue_export_expression",
+    expression = "version",
+    instance = ":cue_instance",
+    package = "bazel6",
+)
+
+write_file(
+    name = "export_expression_golden",
+    out = "export-expression.golden.yaml",
+    content = ["\"6.3.2\"\n"],
+)
+
+diff_test(
+    name = "diff_export_expression",
+    file1 = ":cue_export_expression",
+    file2 = ":export_expression_golden",
+)
+
+# def
+
+cue_def(
+    name = "cue_def",
+    instance = ":cue_instance",
+    package = "bazel6",
+)
+
+write_file(
+    name = "def_golden",
+    out = "def.golden",
+    content = ["""package bazel6
+
+version: "6.3.2"
+"""],
+)
+
+diff_test(
+    name = "diff_def",
+    file1 = ":cue_def",
+    file2 = ":def_golden",
+)
