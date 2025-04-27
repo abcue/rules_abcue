@@ -31,4 +31,5 @@ jobs:
           {"folder": ".", "bzlmodEnabled": false},
           {"folder": "e2e/bazel6", "bzlmodEnabled": true}
         ]
-      exclude_windows: true
+      exclude_windows: false
+      bazel_test_command: "bazel test //... --verbose_failures --sandbox_debug"
