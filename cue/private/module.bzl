@@ -15,7 +15,7 @@ def _cue_module_impl(ctx):
     if module_file.basename != expected_module_file:
         fail(msg = """supplied CUE module file is not named "{}"; got "{}" instead""".format(expected_module_file, module_file.basename))
 
-    directory = module_file.dirname
+    directory = module_file.dirname.split("/")[-1]
     expected_module_directory = "cue.mod"
     if directory != expected_module_directory:
         fail(msg = """supplied CUE module directory is not named "{}"; got "{}" instead""".format(expected_module_directory, directory))
