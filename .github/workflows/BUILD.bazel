@@ -19,6 +19,7 @@ cue_instance(
 EXPR = [
     "buildifier",
     "ci",
+    "publish",
     "release",
 ]
 

@@ -1,6 +1,13 @@
 {
   "homepage": "https://github.com/abcue/rules_abcue",
-  "maintainers": [],
+  "maintainers": [
+    {
+      "name": "Yujun Zhang",
+      "email": "zhangyujun@gmail.com",
+      "github": "yujunz",
+      "github_user_id": 6813397
+    }
+  ],
   "repository": ["github:abcue/rules_abcue"],
   "versions": [],
   "yanked_versions": {}
