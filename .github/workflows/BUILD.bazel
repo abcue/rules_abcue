@@ -2,13 +2,6 @@ load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
 load("@rules_abcue//cue:defs.bzl", "cue_export", "cue_instance")
 
-write_source_files(
-    name = "yaml",
-    files = {
-        "ci_gen.yaml": ":ci",
-    },
-)
-
 buildifier(
     name = "buildifier.check",
     exclude_patterns = ["./.git/*"],
@@ -23,10 +16,27 @@ cue_instance(
     ancestor = "//cue.mod",
 )
 
-cue_export(
-    name = "ci",
-    out = "yaml",
-    expression = "ci",
-    instance = ":workflows",
-    package = "workflows",
+EXPR = [
+    "buildifier",
+    "ci",
+    "release",
+]
+
+[
+    cue_export(
+        name = n,
+        out = "yaml",
+        expression = n,
+        instance = ":workflows",
+        package = "workflows",
+    )
+    for n in EXPR
+]
+
+write_source_files(
+    name = "yaml",
+    files = {
+        n + "_gen.yaml": ":" + n
+        for n in EXPR
+    },
 )

@@ -2,6 +2,28 @@ package workflows
 
 import "encoding/json"
 
+buildifier: {
+	name: "Buildifier"
+
+	// Controls when the action will run.
+	on: {
+		// Triggers the workflow on push or pull request events but only for the main branch
+		push: branches: ["main"]
+		pull_request: branches: ["main"]
+		// Allows you to run this workflow manually from the Actions tab
+		workflow_dispatch: null
+	}
+	jobs: check: {
+		"runs-on": "ubuntu-latest"
+		steps: [{
+			uses: "actions/checkout@v4"
+		}, {
+			name: "buildifier"
+			run:  "bazel run --enable_bzlmod //.github/workflows:buildifier.check"
+		}]
+	}
+}
+
 ci: {
 	// Controls when the action will run.
 	on: {
@@ -33,5 +55,18 @@ ci: {
 			]), "", "  ")
 			exclude_windows: true
 		}
+	}
+}
+
+release: {
+	// Cut a release whenever a new tag is pushed to the repo.
+	// You should use an annotated tag, like `git tag -a v1.2.3`
+	// and put the release notes into the commit message for the tag.
+	name: "Release"
+	on: push: tags: ["v*.*.*"]
+	permissions: contents: "write"
+	jobs: release: {
+		uses: "bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v6"
+		with: release_files: "rules_abcue-*.tar.gz"
 	}
 }
