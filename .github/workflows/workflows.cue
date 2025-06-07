@@ -1,10 +1,13 @@
 package workflows
 
-import "encoding/json"
+import (
+	"strings"
+	"encoding/json"
+)
+
+[N=_]: name: *strings.ToTitle(N) | _
 
 buildifier: {
-	name: "Buildifier"
-
 	// Controls when the action will run.
 	on: {
 		// Triggers the workflow on push or pull request events but only for the main branch
@@ -25,6 +28,7 @@ buildifier: {
 }
 
 ci: {
+	name: "CI"
 	// Controls when the action will run.
 	on: {
 		// Triggers the workflow on push or pull request events but only for the main branch
@@ -59,7 +63,6 @@ ci: {
 }
 
 publish: {
-	name: "Publish"
 	on: {
 		// Run the publish workflow after a successful release
 		// Will be triggered from the release.yaml workflow
@@ -99,7 +102,6 @@ release: {
 	// Cut a release whenever a new tag is pushed to the repo.
 	// You should use an annotated tag, like `git tag -a v1.2.3`
 	// and put the release notes into the commit message for the tag.
-	name: "Release"
 	on: push: tags: ["v*.*.*"]
 	permissions: contents: "write"
 	jobs: release: {
