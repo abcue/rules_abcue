@@ -16,26 +16,27 @@ cue_instance(
     ancestor = "//cue.mod",
 )
 
-cue_export(
-    name = "ci",
-    out = "yaml",
-    expression = "ci",
-    instance = ":workflows",
-    package = "workflows",
-)
+EXPR = [
+    "buildifier",
+    "ci",
+    "release",
+]
 
-cue_export(
-    name = "release",
-    out = "yaml",
-    expression = "release",
-    instance = ":workflows",
-    package = "workflows",
-)
+[
+    cue_export(
+        name = n,
+        out = "yaml",
+        expression = n,
+        instance = ":workflows",
+        package = "workflows",
+    )
+    for n in EXPR
+]
 
 write_source_files(
     name = "yaml",
     files = {
-        "ci_gen.yaml": ":ci",
-        "release_gen.yaml": ":release",
+        n + "_gen.yaml": ":" + n
+        for n in EXPR
     },
 )

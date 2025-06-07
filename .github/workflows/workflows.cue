@@ -2,6 +2,28 @@ package workflows
 
 import "encoding/json"
 
+buildifier: {
+	name: "Buildifier"
+
+	// Controls when the action will run.
+	on: {
+		// Triggers the workflow on push or pull request events but only for the main branch
+		push: branches: ["main"]
+		pull_request: branches: ["main"]
+		// Allows you to run this workflow manually from the Actions tab
+		workflow_dispatch: null
+	}
+	jobs: check: {
+		"runs-on": "ubuntu-latest"
+		steps: [{
+			uses: "actions/checkout@v4"
+		}, {
+			name: "buildifier"
+			run:  "bazel run --enable_bzlmod //.github/workflows:buildifier.check"
+		}]
+	}
+}
+
 ci: {
 	// Controls when the action will run.
 	on: {
