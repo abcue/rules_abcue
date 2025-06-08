@@ -76,14 +76,16 @@ publish: {
 			// GitHub repository which is a fork of the upstream where the Pull Request will be opened.
 			registry_fork: "abcue/bazel-central-registry"
 			// see note on Attestation Support
-			attest: true
+			attest: *false | true
 		}
 		permissions: {
 			contents: "write"
-			// Necessary if attest:true
-			"id-token": "write"
-			// Necessary if attest:true
-			attestations: "write"
+			if with.attest {
+				// Necessary if attest:true
+				"id-token": "write"
+				// Necessary if attest:true
+				attestations: "write"
+			}
 		}
 		// Necessary to push to the BCR fork, and to open a pull request against a registry
 		secrets: publish_token: "${{ secrets.BCR_PUBLISH_TOKEN }}"
