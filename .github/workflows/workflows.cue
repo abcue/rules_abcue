@@ -5,38 +5,30 @@ import (
 	"encoding/json"
 )
 
-[N=_]: name: *strings.ToTitle(N) | _
-
-buildifier: {
+[N=_]: {
+	name: *strings.ToTitle(N) | _
 	// Controls when the action will run.
-	on: {
+	on: *{
 		// Triggers the workflow on push or pull request events but only for the main branch
 		push: branches: ["main"]
 		pull_request: branches: ["main"]
 		// Allows you to run this workflow manually from the Actions tab
 		workflow_dispatch: null
-	}
-	jobs: check: {
-		"runs-on": "ubuntu-latest"
-		steps: [{
-			uses: "actions/checkout@v4"
-		}, {
-			name: "buildifier"
-			run:  "bazel run --enable_bzlmod //.github/workflows:buildifier.check"
-		}]
-	}
+	} | _
+}
+
+buildifier: jobs: check: {
+	"runs-on": "ubuntu-latest"
+	steps: [{
+		uses: "actions/checkout@v4"
+	}, {
+		name: "buildifier"
+		run:  "bazel run --enable_bzlmod //.github/workflows:buildifier.check"
+	}]
 }
 
 ci: {
 	name: "CI"
-	// Controls when the action will run.
-	on: {
-		// Triggers the workflow on push or pull request events but only for the main branch
-		push: branches: ["main"]
-		pull_request: branches: ["main"]
-		// Allows you to run this workflow manually from the Actions tab
-		workflow_dispatch: null
-	}
 	concurrency: {
 		// Cancel previous actions from the same PR or branch except 'main' branch.
 		// See https://docs.github.com/en/actions/using-jobs/using-concurrency and https://docs.github.com/en/actions/learn-github-actions/contexts for more info.
@@ -102,7 +94,7 @@ release: {
 	// Cut a release whenever a new tag is pushed to the repo.
 	// You should use an annotated tag, like `git tag -a v1.2.3`
 	// and put the release notes into the commit message for the tag.
-	on: push: tags: ["v*.*.*"]
+	on: push: close({tags: ["v*.*.*"]})
 	permissions: contents: "write"
 	jobs: release: {
 		uses: "bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v6"

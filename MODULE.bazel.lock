@@ -93,7 +93,7 @@
     "//cue:extensions.bzl%cue": {
       "general": {
         "bzlTransitiveDigest": "5OP7E31eMmSnozpMsxO09Ek7oDrZQ9+A62gFr4ScFhw=",
-        "usagesDigest": "pci8+I7AmuRtuu4+1Rc1GkI2+O5Rq8xjaJHEYh1p5b4=",
+        "usagesDigest": "RbKCNkk0MME/GOsTsU0d4rdiNX9b5iZXjomxH6DBwSo=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
