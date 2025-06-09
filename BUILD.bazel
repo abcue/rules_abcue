@@ -5,7 +5,5 @@ gazelle_binary(
     languages = ["@bazel_skylib_gazelle_plugin//bzl"],
 )
 
-gazelle(
-    name = "gazelle",
-    gazelle = "gazelle_bin",
-)
+# gazelle:prefix github.com/abcue/rules_abcue
+gazelle(name = "gazelle")
