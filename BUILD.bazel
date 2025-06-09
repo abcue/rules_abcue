@@ -1,9 +1,14 @@
-load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
 
 gazelle_binary(
     name = "gazelle_bin",
-    languages = ["@bazel_skylib_gazelle_plugin//bzl"],
+    languages = DEFAULT_LANGUAGES + [
+        "@bazel_skylib_gazelle_plugin//bzl",
+        "//gazelle/cue",
+    ],
 )
 
-# gazelle:prefix github.com/abcue/rules_abcue
-gazelle(name = "gazelle")
+gazelle(
+    name = "gazelle",
+    gazelle = ":gazelle_bin",
+)
