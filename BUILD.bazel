@@ -4,7 +4,7 @@ gazelle_binary(
     name = "gazelle_bin",
     languages = DEFAULT_LANGUAGES + [
         "@bazel_skylib_gazelle_plugin//bzl",
-        "//gazelle/cue",
+        "//tools/gazelle/cue",
     ],
 )
 

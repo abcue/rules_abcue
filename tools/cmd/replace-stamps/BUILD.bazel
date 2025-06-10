@@ -1,5 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
+# gazelle:prefix github.com/abcue/rules_abcue/tools/cmd/replace-stamps
+
 go_library(
     name = "replace_stamps_lib",
     srcs = ["replace.go"],

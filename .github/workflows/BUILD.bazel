@@ -1,19 +1,13 @@
 load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
 load("@rules_abcue//cue:defs.bzl", "cue_export", "cue_instance")
+load("@rules_cue//cue:cue.bzl", "cue_consolidated_instance")
 
 buildifier(
     name = "buildifier.check",
     exclude_patterns = ["./.git/*"],
     lint_mode = "warn",
     mode = "diff",
-)
-
-cue_instance(
-    name = "workflows",
-    package_name = "workflows",
-    srcs = ["workflows.cue"],
-    ancestor = "//cue.mod",
 )
 
 EXPR = [
@@ -40,4 +34,19 @@ write_source_files(
         n + "_gen.yaml": ":" + n
         for n in EXPR
     },
+)
+
+cue_instance(
+    name = "workflows_cue_instance",
+    package_name = "workflows",
+    srcs = ["workflows.cue"],
+    ancestor = "//.github/workflows/cue.mod:cue.mod",
+    visibility = ["//visibility:public"],
+)
+
+cue_consolidated_instance(
+    name = "workflows_cue_def",
+    instance = ":workflows_cue_instance",
+    output_format = "cue",
+    visibility = ["//visibility:public"],
 )

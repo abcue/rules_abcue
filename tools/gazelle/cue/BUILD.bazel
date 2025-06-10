@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cue",
+    srcs = [
+        "config.go",
+        "cue.go",
+        "generate.go",
+        "resolve.go",
+    ],
+    importpath = "github.com/abcue/rules_abcue/gazelle/cue",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@bazel_gazelle//config",
+        "@bazel_gazelle//label",
+        "@bazel_gazelle//language",
+        "@bazel_gazelle//pathtools",
+        "@bazel_gazelle//repo",
+        "@bazel_gazelle//resolve",
+        "@bazel_gazelle//rule",
+        "@com_github_iancoleman_strcase//:strcase",
+        "@org_cuelang_go//cue/ast",
+        "@org_cuelang_go//cue/parser",
+    ],
+)
